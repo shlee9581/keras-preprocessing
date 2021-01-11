@@ -220,11 +220,7 @@ class BatchFromFilesMixin():
         # self.filepaths is dynamic, is better to call it once outside the loop
         filepaths = self.filepaths
         for i, j in enumerate(index_array):
-            img = load_img(filepaths[j],
-                           color_mode=self.color_mode,
-                           target_size=self.target_size,
-                           interpolation=self.interpolation)
-            x = img_to_array(img, data_format=self.data_format)
+            img = np.load(os.path.join(self.directory, fname))
             # Pillow images should be closed after `load_img`,
             # but not PIL images.
             if hasattr(img, 'close'):
